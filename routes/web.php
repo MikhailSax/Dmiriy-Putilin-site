@@ -3,7 +3,11 @@
 use App\Http\Middleware\EnsureTeamMembership;
 use Illuminate\Support\Facades\Route;
 
-Route::view('/', 'welcome')->name('home');
+Route::view('/', 'public.home')->name('home');
+Route::view('/o-deputate', 'public.about')->name('about');
+Route::view('/novosti', 'public.news')->name('news');
+Route::view('/blog', 'public.blog')->name('blog');
+Route::view('/kontakty', 'public.contacts')->name('contacts');
 
 Route::prefix('{current_team}')
     ->middleware(['auth', 'verified', EnsureTeamMembership::class])
