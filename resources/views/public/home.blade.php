@@ -1,57 +1,95 @@
 <x-public.layout title="Главная" description="Официальный сайт депутата Дмитрия Путилина: обращения граждан, новости округа, блог и контакты приёмной.">
     <!-- Hero -->
-    <section class="relative overflow-hidden bg-blue-950 text-white">
-        <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(220,38,38,0.35),transparent_35%),linear-gradient(120deg,rgba(15,23,42,0.95),rgba(30,58,138,0.85))]"></div>
-        <div class="relative mx-auto grid max-w-7xl items-center gap-10 px-4 py-20 sm:px-6 lg:grid-cols-[1fr_460px] lg:px-8 lg:py-28">
-            <div class="animate-[fade-in_0.7s_ease-out]">
-                <p class="inline-flex rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm font-medium">Официальный сайт депутата</p>
-                <h1 class="mt-6 text-5xl font-semibold tracking-tight sm:text-7xl">Дмитрий Владимирович Путилин</h1>
-                <p class="mt-4 text-xl text-blue-100">Депутат, открытая приёмная и прямой диалог с жителями округа.</p>
-                <p class="mt-6 max-w-2xl text-lg leading-8 text-blue-100/90">Здесь можно направить обращение, узнать последние новости, прочитать отчёты о работе и найти контакты для личного приёма.</p>
-                <div class="mt-9 flex flex-col gap-3 sm:flex-row">
-                    <a href="#appeal" class="rounded-2xl bg-red-700 px-7 py-4 text-center font-semibold text-white transition hover:-translate-y-0.5 hover:bg-red-600">Отправить обращение</a>
-                    <a href="{{ route('news') }}" class="rounded-2xl border border-white/25 bg-white/10 px-7 py-4 text-center font-semibold text-white backdrop-blur transition hover:-translate-y-0.5 hover:bg-white/20">Последние новости</a>
+    <section class="border-b border-slate-200 bg-white">
+        <div class="mx-auto grid max-w-7xl gap-10 px-4 py-14 sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:px-8 lg:py-20">
+            <div class="flex flex-col justify-center">
+                <p class="inline-flex w-fit rounded-full border border-blue-100 bg-blue-50 px-4 py-2 text-sm font-semibold text-blue-900">Официальный сайт депутата</p>
+                <h1 class="mt-6 max-w-4xl text-4xl font-semibold tracking-tight text-slate-950 sm:text-6xl">Дмитрий Владимирович Путилин</h1>
+                <p class="mt-5 max-w-2xl text-xl leading-8 text-slate-600">Открытая приёмная, новости округа и понятный путь для обращения жителей.</p>
+                <div class="mt-8 grid gap-3 sm:flex">
+                    <a href="#appeal" class="rounded-xl bg-blue-900 px-6 py-3.5 text-center font-semibold text-white shadow-sm transition hover:bg-blue-800">Написать обращение</a>
+                    <a href="{{ route('contacts') }}" class="rounded-xl border border-slate-300 bg-white px-6 py-3.5 text-center font-semibold text-slate-900 transition hover:border-blue-200 hover:bg-blue-50">График приёма</a>
                 </div>
-            </div>
-            <div class="rounded-[2.5rem] border border-white/20 bg-white/10 p-4 shadow-2xl backdrop-blur">
-                <div class="aspect-[4/5] rounded-[2rem] bg-gradient-to-br from-slate-200 via-white to-blue-200 p-8 text-blue-950">
-                    <div class="flex h-full flex-col justify-end rounded-[1.5rem] border border-blue-100 bg-white/70 p-6">
-                        <p class="text-sm font-semibold uppercase tracking-[0.3em] text-red-700">Фото депутата</p>
-                        <p class="mt-3 text-3xl font-semibold">Дмитрий Путилин</p>
-                        <p class="mt-2 text-slate-600">Место для официальной фотографии</p>
+                <dl class="mt-10 grid gap-4 sm:grid-cols-3">
+                    <div class="rounded-2xl border border-slate-200 bg-slate-50 p-4">
+                        <dt class="text-sm text-slate-500">Приёмная</dt>
+                        <dd class="mt-1 text-2xl font-semibold text-slate-950">онлайн</dd>
                     </div>
+                    <div class="rounded-2xl border border-slate-200 bg-slate-50 p-4">
+                        <dt class="text-sm text-slate-500">Темы</dt>
+                        <dd class="mt-1 text-2xl font-semibold text-slate-950">ЖКХ · дороги</dd>
+                    </div>
+                    <div class="rounded-2xl border border-slate-200 bg-slate-50 p-4">
+                        <dt class="text-sm text-slate-500">Ответы</dt>
+                        <dd class="mt-1 text-2xl font-semibold text-slate-950">под контролем</dd>
+                    </div>
+                </dl>
+            </div>
+            <div class="rounded-[2rem] border border-slate-200 bg-slate-50 p-6">
+                <div class="flex min-h-[440px] flex-col justify-between rounded-[1.5rem] bg-white p-6 shadow-sm">
+                    <div class="flex items-center justify-between border-b border-slate-100 pb-5">
+                        <div>
+                            <p class="text-sm font-semibold text-slate-950">Быстрые действия</p>
+                            <p class="text-sm text-slate-500">Что можно сделать на сайте</p>
+                        </div>
+                        <span class="rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-700">доступно 24/7</span>
+                    </div>
+                    <div class="grid gap-3 py-6">
+                        @foreach ([['01', 'Отправить обращение', 'Опишите проблему, приложите контакты и тему вопроса.'], ['02', 'Посмотреть новости', 'Читайте публикации о встречах, объектах и решениях.'], ['03', 'Найти контакты', 'Адрес, телефон, почта и расписание общественной приёмной.']] as [$number, $title, $text])
+                            <div class="flex gap-4 rounded-2xl border border-slate-200 p-4">
+                                <span class="grid size-10 shrink-0 place-items-center rounded-full bg-blue-900 text-sm font-semibold text-white">{{ $number }}</span>
+                                <div>
+                                    <p class="font-semibold text-slate-950">{{ $title }}</p>
+                                    <p class="mt-1 text-sm leading-6 text-slate-600">{{ $text }}</p>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                    <p class="rounded-2xl bg-blue-50 p-4 text-sm leading-6 text-blue-950">Если вопрос требует личного приёма, укажите это в обращении — сотрудники приёмной свяжутся с вами для согласования времени.</p>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- Сервисные разделы -->
+    <section class="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
+        <div class="grid gap-4 md:grid-cols-4">
+            @foreach ([['Обращения', 'Передать вопрос в работу', '#appeal'], ['Новости', 'Что происходит в округе', route('news')], ['Блог', 'Позиция и разъяснения', route('blog')], ['Контакты', 'Как связаться с приёмной', route('contacts')]] as [$title, $text, $href])
+                <a href="{{ $href }}" class="group rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition hover:-translate-y-1 hover:border-blue-200 hover:shadow-md">
+                    <p class="font-semibold text-slate-950">{{ $title }}</p>
+                    <p class="mt-2 text-sm leading-6 text-slate-600">{{ $text }}</p>
+                    <span class="mt-4 inline-flex text-sm font-semibold text-blue-900 group-hover:text-blue-700">Перейти →</span>
+                </a>
+            @endforeach
+        </div>
+    </section>
+
     <!-- Новости -->
-    <section class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+    <section class="mx-auto max-w-7xl px-4 pb-14 sm:px-6 lg:px-8">
         <div class="mb-8 flex items-end justify-between gap-6">
             <div>
-                <p class="text-sm font-semibold uppercase tracking-[0.3em] text-red-600">Новости</p>
-                <h2 class="mt-3 text-4xl font-semibold tracking-tight">Последние новости округа</h2>
+                <p class="text-sm font-semibold uppercase tracking-[0.24em] text-blue-800">Новости</p>
+                <h2 class="mt-3 text-3xl font-semibold tracking-tight text-slate-950 sm:text-4xl">Последние материалы</h2>
             </div>
-            <a href="{{ route('news') }}" class="hidden rounded-full border border-slate-200 px-5 py-3 font-semibold text-blue-950 hover:border-red-300 hover:text-red-700 md:inline-flex">Все новости</a>
+            <a href="{{ route('news') }}" class="hidden rounded-xl border border-slate-300 px-5 py-3 font-semibold text-slate-900 hover:border-blue-200 hover:bg-blue-50 md:inline-flex">Все новости</a>
         </div>
 
         <div class="grid gap-6 md:grid-cols-3">
             @forelse($latestNews as $post)
-                <article class="overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-xl">
-                    <div class="h-48 bg-gradient-to-br from-blue-950 to-red-700"></div>
+                <article class="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-md">
+                    <div class="h-2 bg-blue-900"></div>
                     <div class="p-6">
-                        <p class="text-xs font-semibold uppercase tracking-[0.2em] text-red-600">{{ $post->published_at?->format('d.m.Y') }} · {{ $post->category }}</p>
-                        <h3 class="mt-4 text-xl font-semibold">{{ $post->title }}</h3>
+                        <p class="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">{{ $post->published_at?->format('d.m.Y') }} · {{ $post->category }}</p>
+                        <h3 class="mt-4 text-xl font-semibold text-slate-950">{{ $post->title }}</h3>
                         <p class="mt-3 text-sm leading-6 text-slate-600">{{ $post->excerpt }}</p>
-                        <a href="{{ route('news.show', $post) }}" class="mt-5 inline-flex font-semibold text-blue-950 hover:text-red-700">Читать</a>
+                        <a href="{{ route('news.show', $post) }}" class="mt-5 inline-flex font-semibold text-blue-900 hover:text-blue-700">Читать</a>
                     </div>
                 </article>
             @empty
                 @foreach(['Встречи с жителями', 'Благоустройство дворов', 'Контроль обращений'] as $title)
-                    <article class="rounded-[2rem] border border-slate-200 bg-white p-6">
-                        <div class="h-40 rounded-3xl bg-gradient-to-br from-blue-950 to-red-700"></div>
-                        <p class="mt-5 text-xs font-semibold uppercase tracking-[0.2em] text-red-600">Скоро</p>
-                        <h3 class="mt-3 text-xl font-semibold">{{ $title }}</h3>
+                    <article class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+                        <p class="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">Скоро</p>
+                        <h3 class="mt-3 text-xl font-semibold text-slate-950">{{ $title }}</h3>
                         <p class="mt-3 text-slate-600">После публикации материалы появятся в этом блоке автоматически.</p>
                     </article>
                 @endforeach
@@ -59,66 +97,38 @@
         </div>
     </section>
 
-    <!-- Призыв к обращению -->
-    <section class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div class="grid gap-6 rounded-[2.5rem] bg-white p-6 shadow-sm md:grid-cols-[1fr_320px] md:p-10">
-            <div>
-                <p class="text-sm font-semibold uppercase tracking-[0.3em] text-red-600">Общественная приёмная</p>
-                <h2 class="mt-3 text-4xl font-semibold">Поможем зарегистрировать и проконтролировать вопрос</h2>
-                <p class="mt-4 max-w-3xl text-lg leading-8 text-slate-600">Сообщите о проблеме во дворе, ЖКХ, освещении, дорогах, социальных вопросах или предложите инициативу для округа.</p>
-            </div>
-            <div class="flex items-center">
-                <a href="#appeal" class="w-full rounded-2xl bg-blue-950 px-6 py-4 text-center font-semibold text-white transition hover:-translate-y-0.5 hover:bg-red-700">Отправить обращение</a>
-            </div>
-        </div>
-    </section>
-
     <!-- Решённые вопросы -->
-    <section class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-        <p class="text-sm font-semibold uppercase tracking-[0.3em] text-red-600">Решённые вопросы</p>
-        <h2 class="mt-3 text-4xl font-semibold tracking-tight">Работы на контроле и выполненные задачи</h2>
-        <div class="mt-8 grid gap-5 md:grid-cols-5">
-            @foreach ([['Благоустройство','15.07.2026'],['Дороги','18.07.2026'],['Освещение','22.07.2026'],['ЖКХ','25.07.2026'],['Детские площадки','30.07.2026']] as [$title,$date])
-                <article class="rounded-[2rem] border border-slate-200 bg-white p-5 transition hover:-translate-y-1 hover:shadow-lg">
-                    <div class="h-28 rounded-3xl bg-slate-200"></div>
-                    <h3 class="mt-4 font-semibold">{{ $title }}</h3>
-                    <p class="mt-2 text-sm text-slate-500">{{ $date }}</p>
-                    <span class="mt-4 inline-flex rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-700">Завершено</span>
-                </article>
-            @endforeach
+    <section class="bg-white py-14">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <p class="text-sm font-semibold uppercase tracking-[0.24em] text-blue-800">На контроле</p>
+            <h2 class="mt-3 text-3xl font-semibold tracking-tight text-slate-950 sm:text-4xl">Работы и выполненные задачи</h2>
+            <div class="mt-8 grid gap-4 md:grid-cols-5">
+                @foreach ([['Благоустройство','15.07.2026'],['Дороги','18.07.2026'],['Освещение','22.07.2026'],['ЖКХ','25.07.2026'],['Детские площадки','30.07.2026']] as [$title,$date])
+                    <article class="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+                        <span class="inline-flex rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-700">Завершено</span>
+                        <h3 class="mt-4 font-semibold text-slate-950">{{ $title }}</h3>
+                        <p class="mt-2 text-sm text-slate-500">{{ $date }}</p>
+                    </article>
+                @endforeach
+            </div>
         </div>
     </section>
 
     <!-- О депутате -->
-    <section class="mx-auto grid max-w-7xl gap-8 px-4 sm:px-6 lg:grid-cols-[380px_1fr] lg:px-8">
-        <div class="rounded-[2rem] bg-gradient-to-br from-blue-950 to-red-800 p-6 text-white">
-            <div class="aspect-[3/4] rounded-[1.5rem] bg-white/15"></div>
+    <section class="mx-auto grid max-w-7xl gap-8 px-4 py-14 sm:px-6 lg:grid-cols-[0.8fr_1.2fr] lg:px-8">
+        <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+            <div class="aspect-[4/5] rounded-xl bg-slate-100"></div>
+            <p class="mt-4 text-sm text-slate-500">Место для официальной фотографии</p>
         </div>
-        <div class="rounded-[2rem] border border-slate-200 bg-white p-8">
-            <p class="text-sm font-semibold uppercase tracking-[0.3em] text-red-600">О депутате</p>
-            <h2 class="mt-3 text-4xl font-semibold">Дмитрий Владимирович Путилин</h2>
+        <div class="rounded-2xl border border-slate-200 bg-white p-8 shadow-sm">
+            <p class="text-sm font-semibold uppercase tracking-[0.24em] text-blue-800">О депутате</p>
+            <h2 class="mt-3 text-3xl font-semibold text-slate-950 sm:text-4xl">Дмитрий Владимирович Путилин</h2>
             <div class="mt-6 grid gap-5 text-slate-600 md:grid-cols-3">
                 <p><strong class="block text-slate-950">Биография</strong>Открытая работа с жителями и решение вопросов округа.</p>
                 <p><strong class="block text-slate-950">Образование</strong>Профильное образование и постоянное повышение квалификации.</p>
                 <p><strong class="block text-slate-950">Деятельность</strong>Контроль обращений, встречи, развитие инфраструктуры.</p>
             </div>
-            <a href="{{ route('about') }}" class="mt-8 inline-flex rounded-2xl border border-slate-200 px-6 py-3 font-semibold text-blue-950 hover:border-red-300 hover:text-red-700">Подробнее</a>
-        </div>
-    </section>
-
-    <!-- Галерея -->
-    <section class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8" x-data="{ image: null }">
-        <p class="text-sm font-semibold uppercase tracking-[0.3em] text-red-600">Галерея</p>
-        <h2 class="mt-3 text-4xl font-semibold tracking-tight">Фотографии встреч и объектов</h2>
-        <div class="mt-8 grid gap-4 md:grid-cols-4">
-            @for($i = 1; $i <= 8; $i++)
-                <button type="button" @click="image = 'Фото {{ $i }}'" class="h-44 rounded-[2rem] bg-gradient-to-br from-slate-200 to-blue-100 transition hover:-translate-y-1"></button>
-            @endfor
-        </div>
-
-        <!-- Модальное окно -->
-        <div x-show="image" x-cloak @click="image = null" class="fixed inset-0 z-50 grid place-items-center bg-slate-950/80 p-6">
-            <div class="w-full max-w-3xl rounded-[2rem] bg-white p-8 text-center text-2xl font-semibold" x-text="image"></div>
+            <a href="{{ route('about') }}" class="mt-8 inline-flex rounded-xl border border-slate-300 px-6 py-3 font-semibold text-slate-900 hover:border-blue-200 hover:bg-blue-50">Подробнее</a>
         </div>
     </section>
 
@@ -128,23 +138,23 @@
     </section>
 
     <!-- Контакты -->
-    <section class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-        <div class="grid gap-6 rounded-[2.5rem] bg-blue-950 p-8 text-white md:grid-cols-4">
+    <section class="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
+        <div class="grid gap-6 rounded-2xl border border-slate-200 bg-white p-8 shadow-sm md:grid-cols-4">
             <div>
-                <p class="text-blue-200">Адрес</p>
-                <p class="mt-2 font-semibold">Общественная приёмная округа</p>
+                <p class="text-slate-500">Адрес</p>
+                <p class="mt-2 font-semibold text-slate-950">Общественная приёмная округа</p>
             </div>
             <div>
-                <p class="text-blue-200">Телефон</p>
-                <p class="mt-2 font-semibold">+7 (000) 000-00-00</p>
+                <p class="text-slate-500">Телефон</p>
+                <p class="mt-2 font-semibold text-slate-950">+7 (000) 000-00-00</p>
             </div>
             <div>
-                <p class="text-blue-200">Email</p>
-                <p class="mt-2 font-semibold">reception@example.ru</p>
+                <p class="text-slate-500">Email</p>
+                <p class="mt-2 font-semibold text-slate-950">reception@example.ru</p>
             </div>
             <div>
-                <p class="text-blue-200">График</p>
-                <p class="mt-2 font-semibold">Пн–Пт, 10:00–18:00</p>
+                <p class="text-slate-500">График</p>
+                <p class="mt-2 font-semibold text-slate-950">Пн–Пт, 10:00–18:00</p>
             </div>
         </div>
     </section>
