@@ -121,3 +121,16 @@ select:focus[data-flux-control] {
         animation: none;
     }
 }
+
+@layer components {
+    .btn-primary { @apply items-center justify-center rounded-xl bg-blue-950 px-5 py-3 text-sm font-bold text-white shadow-lg shadow-blue-950/10 transition hover:-translate-y-0.5 hover:bg-blue-900; }
+    .btn-secondary { @apply inline-flex items-center justify-center rounded-xl border border-slate-300 bg-white/80 px-5 py-3 text-sm font-bold text-blue-950 transition hover:-translate-y-0.5 hover:border-blue-200 hover:bg-blue-50; }
+    .nav-link { @apply transition hover:text-blue-900; }
+    .card { @apply rounded-3xl border border-slate-200 bg-white shadow-sm shadow-slate-200/60; }
+    .eyebrow { @apply text-sm font-bold uppercase tracking-[0.24em] text-blue-800; }
+    .section-title { @apply text-3xl font-bold tracking-[-0.04em] text-slate-950 sm:text-4xl; }
+    .social { @apply grid size-10 place-items-center rounded-full bg-white text-xs font-bold text-blue-950 transition hover:-translate-y-0.5 hover:bg-blue-50; }
+    .portrait-card { @apply relative overflow-hidden bg-gradient-to-br from-slate-100 via-blue-50 to-slate-200; }
+    .portrait-card::after { content: ''; @apply absolute bottom-0 right-8 h-[88%] w-[48%] rounded-t-full bg-gradient-to-b from-slate-900 via-slate-800 to-blue-950 shadow-2xl; }
+    .portrait-card::before { content: ''; @apply absolute right-[16%] top-[14%] z-10 size-28 rounded-full bg-gradient-to-br from-slate-100 to-slate-300 shadow-xl; }
+}
