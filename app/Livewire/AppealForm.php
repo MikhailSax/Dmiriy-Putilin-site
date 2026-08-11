@@ -19,6 +19,7 @@ class AppealForm extends Component
     public string $topic = '';
     public string $message = '';
     public array $attachments = [];
+    public bool $consent = false;
 
     public function submit(): void
     {
@@ -37,11 +38,12 @@ class AppealForm extends Component
             'topic' => ['required', 'string', 'max:160'],
             'message' => ['required', 'string', 'min:10', 'max:2000'],
             'attachments.*' => ['nullable', 'file', 'max:5120', 'mimes:jpg,jpeg,png,pdf,doc,docx'],
+            'consent' => ['accepted'],
         ]);
 
         RateLimiter::hit($key, 600);
 
-        $appealData = collect($validated)->except('attachments')->all();
+        $appealData = collect($validated)->except('attachments', 'consent')->all();
 
         $files = collect($this->attachments)
             ->map(fn ($file) => $file->store('appeals', 'public'))
@@ -61,9 +63,9 @@ class AppealForm extends Component
             ]],
         ]);
 
-        $this->reset('name', 'phone', 'email', 'address', 'topic', 'message', 'attachments');
+        $this->reset('name', 'phone', 'email', 'address', 'topic', 'message', 'attachments', 'consent');
 
-        session()->flash('appealStatus', "Обращение {$number} зарегистрировано. Мы свяжемся с вами после первичной проверки.");
+        session()->flash('appealStatus', "Ваше обращение принято. Номер обращения: {$number}. Мы свяжемся с вами после первичной проверки.");
     }
 
     public function render()

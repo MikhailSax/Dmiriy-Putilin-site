@@ -12,15 +12,19 @@ Route::get('/', function () {
     ]);
 })->name('home');
 
-Route::view('/o-deputate', 'public.about')->name('about');
+Route::view('/about', 'public.about')->name('about');
+Route::redirect('/o-deputate', '/about');
+Route::view('/activity', 'public.activity')->name('activity');
+Route::view('/appeals', 'public.appeals')->name('appeals');
 
-Route::get('/novosti', function () {
+Route::redirect('/novosti', '/news');
+Route::get('/news', function () {
     return view('public.news', [
         'news' => NewsPost::published()->latest('published_at')->paginate(9),
     ]);
 })->name('news');
 
-Route::get('/novosti/{newsPost}', function (NewsPost $newsPost) {
+Route::get('/news/{newsPost}', function (NewsPost $newsPost) {
     abort_unless($newsPost->status === 'published', 404);
 
     return view('public.show-post', [
@@ -54,7 +58,8 @@ Route::get('/blog/{blogPost}', function (BlogPost $blogPost) {
     ]);
 })->name('blog.show');
 
-Route::view('/kontakty', 'public.contacts')->name('contacts');
+Route::view('/contacts', 'public.contacts')->name('contacts');
+Route::redirect('/kontakty', '/contacts');
 
 // Карта сайта
 Route::get('/sitemap.xml', function () {
@@ -63,7 +68,9 @@ Route::get('/sitemap.xml', function () {
         route('about'),
         route('news'),
         route('blog'),
-        route('contacts')
+        route('contacts'),
+        route('activity'),
+        route('appeals')
     ])
     ->merge(NewsPost::published()->pluck('slug')->map(fn ($slug) => route('news.show', $slug)))
     ->merge(BlogPost::published()->pluck('slug')->map(fn ($slug) => route('blog.show', $slug)));
